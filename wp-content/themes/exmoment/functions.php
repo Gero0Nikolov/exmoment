@@ -123,6 +123,12 @@ function exmoment_scripts() {
 
 	wp_enqueue_script( 'exmoment-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
+	if ( is_user_logged_in() ) {
+		wp_enqueue_style( 'exmoment-logged-css', get_template_directory_uri() . '/logged/logged.css' );
+		wp_enqueue_script( 'exmoment-logged-js', get_template_directory_uri() . '/logged/logged.js', array( "jquery" ), '', true );
+		wp_enqueue_script( 'exmoment-playroom-js', get_template_directory_uri() . '/logged/play-room.js', array( "jquery" ), '', true );
+	}
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -156,3 +162,219 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+add_action( 'wp_ajax_add_server', 'add_server' );
+add_action( 'wp_ajax_nopriv_add_server', 'add_server' );
+function add_server() {
+	$server_name = isset( $_POST[ "server_name" ] ) && !empty( $_POST[ "server_name" ] ) ? sanitize_text_field( $_POST[ "server_name" ] ) : "";
+	$result = false;
+
+	if ( is_user_logged_in() && !empty( $server_name ) && strlen( $server_name ) < 15 ) {
+		$user_id = get_current_user_id();
+		$server_id = substr( md5( microtime() ), 0, 10 );
+
+		global $wpdb;
+
+		$user_servers_relations = $wpdb->prefix ."user_server_relations";
+		$sql_ = "SELECT ID FROM $user_servers_relations WHERE user_id=$user_id AND server_id='$server_id' LIMIT 1";
+		$result_ = $wpdb->get_results( $sql_, OBJECT );
+
+		if ( count( $result_ ) == 0 ) {
+			$wpdb->insert(
+				$user_servers_relations,
+				array(
+					"user_id" => $user_id,
+					"server_id" => $server_id,
+					"server_name" => $server_name
+				)
+			);
+			$result = $server_id;
+		}
+	}
+
+	echo json_encode( $result );
+	die( "" );
+}
+
+add_action( 'wp_ajax_add_remote', 'add_remote' );
+add_action( 'wp_ajax_nopriv_add_remote', 'add_remote' );
+function add_remote() {
+	$remote_name = isset( $_POST[ "remote_name" ] ) && !empty( $_POST[ "remote_name" ] ) ? sanitize_text_field( $_POST[ "remote_name" ] ) : "";
+	$result = false;
+
+	if ( is_user_logged_in() && !empty( $remote_name ) && strlen( $remote_name ) < 15 ) {
+		$user_id = get_current_user_id();
+		$remote_id = substr( md5( microtime() ), 0, 10 );
+
+		global $wpdb;
+
+		$user_remotes_relations = $wpdb->prefix ."user_remotes_relations";
+		$sql_ = "SELECT ID FROM $user_remotes_relations WHERE user_id=$user_id AND remote_id='$remote_id' LIMIT 1";
+		$result_ = $wpdb->get_results( $sql_, OBJECT );
+
+		if ( count( $result_ ) == 0 ) {
+			$wpdb->insert(
+				$user_remotes_relations,
+				array(
+					"user_id" => $user_id,
+					"remote_id" => $remote_id,
+					"remote_name" => $remote_name
+				)
+			);
+			$result = $remote_id;
+		}
+	}
+
+	echo json_encode( $result );
+	die( "" );
+}
+
+function get_servers() {
+	$result_ = array();
+
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+
+		global $wpdb;
+
+		$user_servers_relations = $wpdb->prefix ."user_server_relations";
+
+		$sql_ = "SELECT server_id, server_name FROM $user_servers_relations WHERE user_id=$user_id ORDER BY ID DESC";
+		$result_ = $wpdb->get_results( $sql_, OBJECT );
+	}
+
+	return $result_;
+}
+
+function get_remotes() {
+	$result_ = array();
+
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+
+		global $wpdb;
+
+		$user_remotes_relations = $wpdb->prefix ."user_remotes_relations";
+
+		$sql_ = "SELECT remote_id, remote_name FROM $user_remotes_relations WHERE user_id=$user_id ORDER BY ID DESC";
+		$result_ = $wpdb->get_results( $sql_, OBJECT );
+	}
+
+	return $result_;
+}
+
+add_action( 'wp_ajax_remove_server', 'remove_server' );
+add_action( 'wp_ajax_nopriv_remove_server', 'remove_server' );
+function remove_server() {
+	$response = false;
+
+	$server_id = isset( $_POST[ "server_id" ] ) && !empty( $_POST[ "server_id" ] ) ? sanitize_text_field( $_POST[ "server_id" ] ) : "";
+
+	if ( is_user_logged_in() && !empty( $server_id ) ) {
+		$user_id = get_current_user_id();
+
+		global $wpdb;
+
+		$user_servers_relations = $wpdb->prefix ."user_server_relations";
+		$wpdb->delete(
+			$user_servers_relations,
+			array(
+				"user_id" => $user_id,
+				"server_id" => $server_id
+			)
+		);
+
+		$response = $server_id;
+	}
+
+	echo json_encode( $response );
+	die( "" );
+}
+
+add_action( 'wp_ajax_remove_remote', 'remove_remote' );
+add_action( 'wp_ajax_nopriv_remove_remote', 'remove_remote' );
+function remove_remote() {
+	$response = false;
+
+	$remote_id = isset( $_POST[ "remote_id" ] ) && !empty( $_POST[ "remote_id" ] ) ? sanitize_text_field( $_POST[ "remote_id" ] ) : "";
+
+	if ( is_user_logged_in() && !empty( $remote_id ) ) {
+		$user_id = get_current_user_id();
+
+		global $wpdb;
+
+		$user_remotes_relations = $wpdb->prefix ."user_remotes_relations";
+		$wpdb->delete(
+			$user_remotes_relations,
+			array(
+				"user_id" => $user_id,
+				"remote_id" => $remote_id
+			)
+		);
+
+		$response = $remote_id;
+	}
+
+	echo json_encode( $response );
+	die( "" );
+}
+
+add_action( 'wp_ajax_get_controller_cmds', 'get_controller_cmds' );
+add_action( 'wp_ajax_nopriv_get_controller_cmds', 'get_controller_cmds' );
+function get_controller_cmds() {
+	$server_id = isset( $_POST[ "server_id" ] ) && !empty( $_POST[ "server_id" ] ) ? sanitize_text_field( $_POST[ "server_id" ] ) : "";
+
+	$response = false;
+
+	if ( is_user_logged_in() && !empty( $server_id ) ) {
+		global $wpdb;
+
+		$controller_server_relations = $wpdb->prefix ."controller_server_relations";
+		$sql_ = "SELECT ID, command FROM $controller_server_relations WHERE server_id='$server_id'";
+		$results_ = $wpdb->get_results( $sql_, OBJECT );
+
+		if ( !empty( $results_ ) ) {
+			$response = array();
+			foreach ( $results_ as $result_ ) {
+				array_push( $response, $result_->command );
+				$wpdb->delete(
+					$controller_server_relations,
+					array(
+						"ID" => $result_->ID
+					)
+				);
+			}
+		}
+	}
+
+	echo json_encode( $response );
+	die( "" );
+}
+
+add_action( 'wp_ajax_send_server_command', 'send_server_command' );
+add_action( 'wp_ajax_nopriv_send_server_command', 'send_server_command' );
+function send_server_command() {
+	$command = isset( $_POST[ "command" ] ) && !empty( $_POST[ "command" ] ) ? sanitize_text_field( $_POST[ "command" ] ) : "";
+	$remote_id = isset( $_POST[ "remote_id" ] ) && !empty( $_POST[ "remote_id" ] ) ? sanitize_text_field( $_POST[ "remote_id" ] ) : "";
+	$server_id = isset( $_POST[ "server_id" ] ) && !empty( $_POST[ "server_id" ] ) ? sanitize_text_field( $_POST[ "server_id" ] ) : "";
+
+	$response = false;
+
+	if ( is_user_logged_in() && !empty( $command ) && !empty( $remote_id ) && !empty( $server_id ) ) {
+		global $wpdb;
+
+		$controller_server_relations = $wpdb->prefix ."controller_server_relations";
+		$wpdb->insert(
+			$controller_server_relations,
+			array(
+				"controller_id" => $remote_id,
+				"server_id" => $server_id,
+				"command" => $command
+			)
+		);
+
+		$response = true;
+	}
+
+	echo json_encode( $response );
+	die( "" );
+}
