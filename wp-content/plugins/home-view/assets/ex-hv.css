@@ -1,0 +1,109 @@
+.page-template-home-view #default-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: #fff; }
+  .page-template-home-view #default-view #camera-view {
+    display: block;
+    position: relative;
+    width: 60%; }
+.page-template-home-view #app-view {
+  display: flex;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  padding: 5vh 0;
+  width: 95%;
+  max-width: 400px;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 100vh; }
+  .page-template-home-view #app-view #last-capture {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    background-color: #ddd;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer; }
+    .page-template-home-view #app-view #last-capture.filled:before {
+      content: ""; }
+    .page-template-home-view #app-view #last-capture:before {
+      content: "Latest capture";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 1rem;
+      font-weight: normal;
+      color: #333; }
+  .page-template-home-view #app-view .open-library {
+    display: block;
+    width: 100%;
+    margin-top: 0.5em;
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    background: #f39c12;
+    padding: 0.75em;
+    min-width: 92px; }
+    .page-template-home-view #app-view .open-library:hover {
+      background: #e67e22; }
+.page-template-home-view .hidden {
+  display: none !important; }
+.page-template-home-view .captures-library {
+  display: block;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 95%;
+  height: 100%;
+  background: #fff;
+  max-width: 484px;
+  transform: translateX(-50%) translateZ(0);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2.5em 0;
+  -webkit-overflow-scrolling: touch; }
+  .page-template-home-view .captures-library .captures-list {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: calc(100% - 50px - 0.5em);
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
+    .page-template-home-view .captures-library .captures-list .capture-anchor {
+      display: inline-block;
+      position: relative;
+      font-size: 1rem;
+      width: 31.5%;
+      max-width: 31vw;
+      height: 26.5%;
+      max-height: 31vw;
+      margin: 0.5%; }
+      .page-template-home-view .captures-library .captures-list .capture-anchor .capture {
+        display: block;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        background-color: #eee; }
+
+/*# sourceMappingURL=ex-hv.css.map */

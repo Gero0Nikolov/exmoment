@@ -230,6 +230,12 @@ button {
 		    padding: 0.25em;
 		    background: rgba(255, 255, 255, 0.35);
 		    display: inline-block;
+			margin: 0.5em;
+
+			.application-icon {
+				display: block;
+				margin: 0 auto;
+			}
 
 			&:hover {
 				background: rgba(255, 255, 255, 0.75);

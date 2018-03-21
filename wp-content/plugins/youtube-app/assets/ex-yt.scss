@@ -68,6 +68,7 @@
 				position: relative;
 				width: 100%;
 				height: 35vh;
+				min-height: 255px;
 				background-size: cover;
 				background-position: center;
 			}
@@ -104,9 +105,7 @@
 	}
 
 	.playing-popup {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		display: block;
 		justify-content: center;
 		position: fixed;
 		top: 0;
@@ -114,16 +113,19 @@
 		width: 95%;
 		height: 100%;
 		background: #fff;
-		max-width: 480px;
+		max-width: 484px;
 		transform: translateX(-50%) translateZ(0);
+		overflow-y: auto;
 		overflow-x: hidden;
-		padding: 5vh 0;
+		padding: 2.5em 0;
+		-webkit-overflow-scrolling: touch;
 
 		.video-thumbnail {
 			display: block;
 			position: relative;
 			width: 100%;
 			height: 35vh;
+			min-height: 255px;
 			background-size: cover;
 			background-position: center;
 		}
@@ -136,7 +138,41 @@
 			font-weight: normal;
 			color: #333;
 			line-height: 125%;
-			padding: 0.5em 0;
+			padding: 0.5em 0.5em;
+		}
+
+		.video-container {
+			display: block;
+			position: relative;
+			margin-bottom: 1em;
+			cursor: pointer;
+
+			&:last-of-type { margin-bottom: 0; }
+
+			.video-thumbnail {
+				display: block;
+				position: relative;
+				width: 100%;
+				height: 35vh;
+				min-height: 255px;
+				background-size: cover;
+				background-position: center;
+			}
+
+			.video-title {
+				display: block;
+				position: relative;
+				font-family: sans-serif;
+				font-size: 1.25rem;
+				font-weight: normal;
+				color: #333;
+				line-height: 125%;
+				padding: 0.5em 0.5em;
+				margin: 0;
+				border-left: 1px solid #aaa;
+				border-right: 1px solid #aaa;
+				border-bottom: 1px solid #aaa;
+			}
 		}
 	}
 
@@ -196,5 +232,40 @@
 		&:active {
 			background: #c0392b;
 		}
+	}
+
+	#back-app-button {
+		display: block;
+		background: none;
+		border: none;
+		font-family: sans-serif;
+		font-size: 1rem;
+		padding: 0 0 0.85em 0;
+		color: #3498db;
+	}
+
+	#up-next,
+	#related-videos {
+		display: block;
+		width: 100%;
+
+		.up-next-title,
+		.suggested-title {
+			display: block;
+			font-family: sans-serif;
+			font-size: 1rem;
+			font-weight: bold;
+			color: #333;
+			text-align: left;
+		}
+	}
+}
+
+.mobile {
+	.playing-popup {
+		width: 100%;
+		max-width: none;
+		padding-left: 2.5%;
+		padding-right: 2.5%;
 	}
 }

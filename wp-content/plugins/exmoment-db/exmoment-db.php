@@ -65,6 +65,37 @@ class EX_MOMENT_DB {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			dbDelta( $sql_ );
 		}
+
+		$server_controller_relations = $wpdb->prefix ."server_controller_relations";
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '$server_controller_relations'" ) != $server_controller_relations ) {
+			$charset_collate = $wpdb->get_charset_collate();
+			$sql_ = "
+			CREATE TABLE $server_controller_relations (
+			 	ID INT NOT NULL AUTO_INCREMENT,
+				server_id VARCHAR(10),
+				controller_id VARCHAR(10),
+				command VARCHAR(255),
+				PRIMARY KEY(ID)
+			) $charset_collate;
+			";
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql_ );
+		}
+
+		$user_homeview_captures = $wpdb->prefix ."user_homeview_captures";
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '$user_homeview_captures'" ) != $user_homeview_captures ) {
+			$charset_collate = $wpdb->get_charset_collate();
+			$sql_ = "
+			CREATE TABLE $user_homeview_captures (
+			 	ID INT NOT NULL AUTO_INCREMENT,
+				user_id INT,
+				capture_name VARCHAR(255),
+				PRIMARY KEY(ID)
+			) $charset_collate;
+			";
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql_ );
+		}
 	}
 }
 

@@ -188,7 +188,11 @@ button {
       box-shadow: 0 0 0 1px #aaa;
       padding: 0.25em;
       background: rgba(255, 255, 255, 0.35);
-      display: inline-block; }
+      display: inline-block;
+      margin: 0.5em; }
+      #play-room .applications-container .application-container .application-icon {
+        display: block;
+        margin: 0 auto; }
       #play-room .applications-container .application-container:hover {
         background: rgba(255, 255, 255, 0.75);
         box-shadow: 0 0 0 5px #aaa; }

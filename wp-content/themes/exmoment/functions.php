@@ -350,6 +350,38 @@ function get_controller_cmds() {
 	die( "" );
 }
 
+add_action( 'wp_ajax_get_remote_cmds', 'get_remote_cmds' );
+add_action( 'wp_ajax_nopriv_get_remote_cmds', 'get_remote_cmds' );
+function get_remote_cmds() {
+	$remote_id = isset( $_POST[ "remote_id" ] ) && !empty( $_POST[ "remote_id" ] ) ? sanitize_text_field( $_POST[ "remote_id" ] ) : "";
+
+	$response = false;
+
+	if ( is_user_logged_in() && !empty( $remote_id ) ) {
+		global $wpdb;
+
+		$server_controller_relations = $wpdb->prefix ."server_controller_relations";
+		$sql_ = "SELECT ID, command FROM $server_controller_relations WHERE controller_id='$remote_id'";
+		$results_ = $wpdb->get_results( $sql_, OBJECT );
+
+		if ( !empty( $results_ ) ) {
+			$response = array();
+			foreach ( $results_ as $result_ ) {
+				array_push( $response, $result_->command );
+				$wpdb->delete(
+					$server_controller_relations,
+					array(
+						"ID" => $result_->ID
+					)
+				);
+			}
+		}
+	}
+
+	echo json_encode( $response );
+	die( "" );
+}
+
 add_action( 'wp_ajax_send_server_command', 'send_server_command' );
 add_action( 'wp_ajax_nopriv_send_server_command', 'send_server_command' );
 function send_server_command() {
@@ -377,4 +409,26 @@ function send_server_command() {
 
 	echo json_encode( $response );
 	die( "" );
+}
+
+function send_remote_command( $command, $remote_id, $server_id ) {
+	$command = sanitize_text_field( $command );
+	$remote_id = sanitize_text_field( $remote_id );
+	$server_id = sanitize_text_field( $remote_id );
+
+	$response = false;
+
+	if ( !empty( $command ) && !empty( $remote_id ) && !empty( $server_id ) ) {
+		global $wpdb;
+
+		$server_controller_relations = $wpdb->prefix ."server_controller_relations";
+		$wpdb->insert(
+			$server_controller_relations,
+			array(
+				"server_id" => $server_id,
+				"controller_id" => $remote_id,
+				"command" => $command
+			)
+		);
+	}
 }
