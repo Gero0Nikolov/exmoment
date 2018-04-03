@@ -27,7 +27,7 @@ if ( $device != "" ) {
 	<div id="app-view" class="<?php echo $device == "server" ? "hidden" : ""; ?>">
 		<?php if ( $device == "remote" ) { ?>
 		<button id="back-app-button">Back</button>
-		<input type="text" placeholder="Search for videos..." id="search-trigger">
+		<input type="text" placeholder="Search for videos..." id="search-trigger" onClick="this.setSelectionRange(0, this.value.length)">
 		<div id="search-results"></div>
 		<?php } ?>
 	</div>
@@ -43,5 +43,5 @@ if ( $device != "" ) {
 
 <?php
 	get_footer( "logged" );
-} else { wp_redirect( get_siteurl() ); }
+} else { wp_redirect( get_site_url() ); }
 ?>

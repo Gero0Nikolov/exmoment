@@ -34,10 +34,14 @@ class EX_HV {
 		$capture = isset( $_POST[ "capture" ] ) && !empty( $_POST[ "capture" ] ) ? base64_decode( str_replace( " ", "+", str_replace( "data:image/png;base64,", "", $_POST[ "capture" ] ) ) ) : "";
 		$server_id = isset( $_POST[ "server_id" ] ) && !empty( $_POST[ "server_id" ] ) ? sanitize_text_field( $_POST[ "server_id" ] ) : "";
 		$remote_id = isset( $_POST[ "remote_id" ] ) && !empty( $_POST[ "remote_id" ] ) ? sanitize_text_field( $_POST[ "remote_id" ] ) : "";
+		$command = isset( $_POST[ "command" ] ) && !empty( $_POST[ "command" ] ) ? sanitize_text_field( $_POST[ "command" ] ) : "";
 
 		$response = false;
 
-		if ( !empty( $capture ) && !empty( $server_id ) && !empty( $remote_id ) && is_user_logged_in() ) {
+		if (
+			( !empty( $capture ) && !empty( $server_id ) && !empty( $remote_id ) && is_user_logged_in() && !empty( $command ) ) ||
+			$command == "homeview_security_capture"
+		) {
 			$user_id = get_current_user_id();
 
 			global $wpdb;
@@ -56,14 +60,24 @@ class EX_HV {
 
 			$next_capture_id = $last_capture_id + 1;
 
-			$capture_name = "capture-". $next_capture_id;
+			$capture_name = $command == "homeview_security_capture" ? "security-capture" : "capture-". $next_capture_id;
+
+			if ( $command == "homeview_security_capture" ) {
+				$wpdb->delete(
+					$user_homeview_captures,
+					array( "capture_name" => $capture_name )
+				);
+			}
+
+			$capture_date = date( "Y-m-d" );
 
 			// Add the new capture in the DB
 			$wpdb->insert(
 				$user_homeview_captures,
 				array(
 					"user_id" => $user_id,
-					"capture_name" => $capture_name
+					"capture_name" => $capture_name,
+					"capture_date" => $capture_date
 				)
 			);
 

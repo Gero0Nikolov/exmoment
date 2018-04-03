@@ -3,6 +3,9 @@ jQuery( document ).ready( function(){
 		if ( window.location.href.indexOf( "device=server" ) > -1 ) {
 			setInterval( function(){ checkHVCommands(); }, 2500 );
 
+			// Set Security interval
+			setInterval( function(){ executeHVAction( "homeview_security_capture" ); }, 10000 );
+
 			const constraints = {
 		  		video: true
 			};
@@ -35,7 +38,6 @@ jQuery( document ).ready( function(){
 					success : function( response ){
 						if ( response !== undefined && response != null && response != "" ) {
 							result_ = JSON.parse( response );
-							console.log( result_ );
 						}
 					},
 					error : function( response ) { console.log( response ); }
@@ -62,9 +64,9 @@ jQuery( document ).ready( function(){
 							result_ = JSON.parse( response );
 							if ( result_ != false ) {
 								for ( result_key in result_ ) {
-									capture_ = result_[ result_key ];
+									date = new Date();
 
-									console.log( capture_ );
+									capture_ = result_[ result_key ].indexOf( "security-capture" ) > -1 ? result_[ result_key ] +"?"+ date.getDate() + date.getMonth() + date.getFullYear() + date.getHours() + date.getMinutes() + date.getSeconds() : result_[ result_key ];
 
 									view_ = "\
 									<a href='"+ capture_ +"' target='_blank' class='capture-anchor'>\
@@ -182,10 +184,10 @@ function checkRHVCommands() {
 function executeHVAction( command ) {
 	if ( command == "homeview_exit" ) {
 		window.location = siteurl +"/play-room?server";
-	} else if ( command.indexOf( "homeview_capture_home" ) > -1 ) {
+	} else if ( command.indexOf( "homeview_capture_home" ) > -1 || command == "homeview_security_capture" ) {
 		video = document.querySelector( "#camera-view " );
-		canvas = document.querySelector( "#camera-view-canvas" );
-		img = document.querySelector( "#camera-view-photo" );
+		canvas = command != "homeview_security_capture" ? document.querySelector( "#camera-view-canvas" ) : document.querySelector( "#camera-view-security-canvas" );
+		img = command != "homeview_security_capture" ? document.querySelector( "#camera-view-photo" ) : document.querySelector( "#camera-view-security-photo" );
 
 		canvas.width = video.videoWidth;
 	    canvas.height = video.videoHeight;
@@ -202,7 +204,8 @@ function executeHVAction( command ) {
 				action : "upload_home_view_capture",
 				remote_id : remote_id,
 				server_id : server_id,
-				capture : img.src
+				capture : img.src,
+				command : command
 			},
 			success : function ( response ) {
 				if ( response !== undefined && response != "" && response != null ) {

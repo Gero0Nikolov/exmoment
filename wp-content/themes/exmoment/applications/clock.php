@@ -1,8 +1,9 @@
 <?php
-// Template Name: Home View
+// Template Name: Clock
 
 $device = isset( $_GET[ "device" ] ) && !empty( $_GET[ "device" ] ) ? sanitize_text_field( $_GET[ "device" ] ) : "";
 $server_id = isset( $_GET[ "server_id" ] ) && !empty( $_GET[ "server_id" ] ) ? sanitize_text_field( $_GET[ "server_id" ] ) : "";
+
 if ( $device != "" ) {
 	get_header( "logged" );
 
@@ -11,22 +12,26 @@ if ( $device != "" ) {
 	?>
 
 	<div id="default-view" class="<?php echo $device == "server" ? "" : "hidden"; ?>">
-		<video id="camera-view" autoplay="autoplay"></video>
-		<img id="camera-view-photo" src="" class="hidden" />
-		<canvas id="camera-view-canvas" style="display: none;"></canvas>
-		<img id="camera-view-security-photo" src="" class="hidden" />
-		<canvas id="camera-view-security-canvas" style="display: none;"></canvas>
+		<div id="clock-view">
+			<div id="backgrounds-list"></div>
+			<div id="clock-container">
+				<div id="clock">
+					<span id="hour" class="clock-label">0</span>
+					<span class="clock-label separator"></span>
+					<span id="minute" class="clock-label">0</span>
+				</div>
+				<div id="alarms"><span id="alarms-counter">0</span> alarms</div>
+			</div>
+		</div>
 	</div>
 	<div id="app-view" class="<?php echo $device == "server" ? "hidden" : ""; ?>">
 		<?php if ( $device == "remote" ) { ?>
-			<div id="last-capture"></div>
-			<button id="capture-live-moment" class="add-button">Capture home</button>
-			<button id="open-library" class="open-library">Open Library</button>
 			<button id="back-app-button" class="back-button">Back</button>
 		<?php } ?>
 	</div>
 	<script type="text/javascript">
 	var server_id = "<?php echo $server_id; ?>";
+	var last_active_background = 0;
 	</script>
 
 <?php

@@ -90,6 +90,7 @@ class EX_MOMENT_DB {
 			 	ID INT NOT NULL AUTO_INCREMENT,
 				user_id INT,
 				capture_name VARCHAR(255),
+				capture_date VARCHAR(10),
 				PRIMARY KEY(ID)
 			) $charset_collate;
 			";
