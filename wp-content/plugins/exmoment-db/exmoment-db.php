@@ -97,6 +97,23 @@ class EX_MOMENT_DB {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			dbDelta( $sql_ );
 		}
+
+		$user_clock_alarms = $wpdb->prefix ."user_clock_alarms";
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '$user_clock_alarms'" ) != $user_clock_alarms ) {
+			$charset_collate = $wpdb->get_charset_collate();
+			$sql_ = "
+			CREATE TABLE $user_clock_alarms (
+			 	ID INT NOT NULL AUTO_INCREMENT,
+				user_id INT,
+				hour VARCHAR(2),
+				minute VARCHAR(2),
+				sound LONGTEXT,
+				PRIMARY KEY(ID)
+			) $charset_collate;
+			";
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql_ );
+		}
 	}
 }
 

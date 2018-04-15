@@ -114,6 +114,247 @@
 		align-content: center;
 		justify-content: center;
 		height: 100vh;
+
+		#open-library {
+			display: block;
+			width: 100%;
+			margin-top: 0.5em;
+			font-family: sans-serif;
+			font-size: 1.25rem;
+			font-weight: normal;
+			color: #fff;
+			border-radius: 0;
+			border: none;
+			background: #f39c12;
+			padding: 0.75em;
+			min-width: 92px;
+
+			&:hover { background: #e67e22; }
+		}
+
+		#dismiss-alarm {
+			display: block;
+			width: 100%;
+			margin-top: 0.5em;
+			font-family: sans-serif;
+			font-size: 1.25rem;
+			font-weight: normal;
+			color: #fff;
+			border-radius: 0;
+			border: none;
+			background: #e74c3c;
+			padding: 0.75em;
+			min-width: 92px;
+
+			&:hover { background: #c0392b; }
+		}
+	}
+
+	.new-alarm-container,
+	.alarms-list-container {
+		display: block;
+		justify-content: center;
+		position: fixed;
+		top: 0;
+		left: 50%;
+		width: 95%;
+		height: 100%;
+		background: #fff;
+		max-width: 484px;
+		transform: translateX(-50%) translateZ(0);
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding: 2.5em 0;
+		-webkit-overflow-scrolling: touch;
+
+		.alarms-list {
+			display: block;
+			position: relative;
+			width: 100%;
+			height: calc(100% - 50px - 0.5em);
+			text-align: center;
+			overflow-x: hidden;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+
+			.alarm-row {
+				display: flex;
+				flex-direction: row;
+				align-content: center;
+				justify-content: space-between;
+				width: 100%;
+				position: relative;
+				padding: 0.25em 0;
+				border-bottom: 1px solid #dddd;
+
+				.alarm-col {
+					display: inline-block;
+					width: 50%;
+					text-align: left;
+					font-family: sans-serif;
+					font-size: 1.25rem;
+					font-weight: normal;
+					color: #333;
+					line-height: 100%;
+					padding: 0.5em 0;
+				}
+
+				.controlls-col {
+					display: inline-block;
+					width: 50%;
+					text-align: right;
+
+					.dashicons {
+						display: inline-block;
+						width: auto;
+						height: auto;
+						font-size: 1.25rem;
+						box-shadow: none;
+						border: 1px solid #ddd;
+						border-radius: 0;
+						background: none;
+						vertical-align: middle;
+						padding: 0.35em 0.35em;
+						margin: 0.15em;
+						cursor: pointer;
+
+						&:first-of-type {
+							color: #3498db;
+
+							&:hover,
+							&:active {
+								background: #3498db;
+								color: #fff;
+								border-color: #3498db;
+							}
+						}
+
+						&:last-of-type {
+							color: #e74c3c;
+
+							&:hover,
+							&:active {
+								background: #e74c3c;
+								color: #fff;
+								border-color: #e74c3c;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.new-alarm-builder {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			width: 100%;
+			height: calc(100% - 100px - 0.5em);
+			text-align: center;
+			overflow-x: hidden;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+
+			.flex-row {
+				display: flex;
+				flex-direction: row;
+				align-content: center;
+				justify-content: space-between;
+
+				.col {
+					display: inline-block;
+					width: 49%;
+
+					.alarm-controller {
+						display: block;
+						width: 100%;
+						font-size: 1.5rem;
+						font-weight: normal;
+						color: #333;
+						padding: 0.5em;
+						line-height: 100%;
+						height: auto;
+						margin: 0.25em 0;
+						background: none;
+						border: 1px solid #ddd;
+						border-radius: 0;
+						cursor: pointer;
+
+						&:hover,
+						&:active {
+							background: #3498db;
+							border-color: #3498db;
+							color: #fff;
+						}
+					}
+
+					.alarm-input {
+						display: block;
+						width: 100%;
+						border: 1px solid #ddd;
+						border-radius: 0;
+						text-align: center;
+						font-size: 1.5rem;
+						font-weight: normal;
+						font-family: sans-serif;
+						text-shadow: none;
+						padding: 0.25em;
+						background: #fafafa;
+
+						&:focus { border-color: #3498db; }
+					}
+				}
+			}
+
+			#sound-url {
+				display: block;
+				position: relative;
+				width: 100%;
+				font-family: sans-serif;
+				font-size: 1.25rem;
+				font-weight: normal;
+				color: #333;
+				border: 1px solid #ddd;
+				border-radius: 0;
+				padding: 0.25em 0.5em;
+				text-align: left;
+
+				&:focus { border-color: #3498db; }
+			}
+		}
+	}
+
+	.alarm-popup {
+		display: inline-block;
+		position: fixed;
+		top: 50%;
+		right: 0;
+		z-index: 2;
+		background: #fff;
+		border-radius: 3px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		transform: translate(0, -50%) translateZ(0);
+		overflow: hidden;
+
+		.alarm-hour {
+			display: block;
+		    font-family: sans-serif;
+		    font-size: 5vw;
+		    font-weight: normal;
+		    color: #333;
+		    text-align: center;
+		    margin: 0.25em 0;
+		    line-height: 100%;
+		}
+
+		.alarm-video {
+			display: block;
+		    margin: 0 auto;
+		    width: 100%;
+		}
 	}
 
 	.hidden { display: none !important; }

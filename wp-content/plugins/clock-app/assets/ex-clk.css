@@ -93,6 +93,221 @@
   align-content: center;
   justify-content: center;
   height: 100vh; }
+  .page-template-clock #app-view #open-library {
+    display: block;
+    width: 100%;
+    margin-top: 0.5em;
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    background: #f39c12;
+    padding: 0.75em;
+    min-width: 92px; }
+    .page-template-clock #app-view #open-library:hover {
+      background: #e67e22; }
+  .page-template-clock #app-view #dismiss-alarm {
+    display: block;
+    width: 100%;
+    margin-top: 0.5em;
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    background: #e74c3c;
+    padding: 0.75em;
+    min-width: 92px; }
+    .page-template-clock #app-view #dismiss-alarm:hover {
+      background: #c0392b; }
+.page-template-clock .new-alarm-container,
+.page-template-clock .alarms-list-container {
+  display: block;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 95%;
+  height: 100%;
+  background: #fff;
+  max-width: 484px;
+  transform: translateX(-50%) translateZ(0);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2.5em 0;
+  -webkit-overflow-scrolling: touch; }
+  .page-template-clock .new-alarm-container .alarms-list,
+  .page-template-clock .alarms-list-container .alarms-list {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: calc(100% - 50px - 0.5em);
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
+    .page-template-clock .new-alarm-container .alarms-list .alarm-row,
+    .page-template-clock .alarms-list-container .alarms-list .alarm-row {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: space-between;
+      width: 100%;
+      position: relative;
+      padding: 0.25em 0;
+      border-bottom: 1px solid #dddd; }
+      .page-template-clock .new-alarm-container .alarms-list .alarm-row .alarm-col,
+      .page-template-clock .alarms-list-container .alarms-list .alarm-row .alarm-col {
+        display: inline-block;
+        width: 50%;
+        text-align: left;
+        font-family: sans-serif;
+        font-size: 1.25rem;
+        font-weight: normal;
+        color: #333;
+        line-height: 100%;
+        padding: 0.5em 0; }
+      .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col,
+      .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col {
+        display: inline-block;
+        width: 50%;
+        text-align: right; }
+        .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons,
+        .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons {
+          display: inline-block;
+          width: auto;
+          height: auto;
+          font-size: 1.25rem;
+          box-shadow: none;
+          border: 1px solid #ddd;
+          border-radius: 0;
+          background: none;
+          vertical-align: middle;
+          padding: 0.35em 0.35em;
+          margin: 0.15em;
+          cursor: pointer; }
+          .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type,
+          .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type {
+            color: #3498db; }
+            .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type:hover, .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type:active,
+            .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type:hover,
+            .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:first-of-type:active {
+              background: #3498db;
+              color: #fff;
+              border-color: #3498db; }
+          .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type,
+          .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type {
+            color: #e74c3c; }
+            .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type:hover, .page-template-clock .new-alarm-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type:active,
+            .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type:hover,
+            .page-template-clock .alarms-list-container .alarms-list .alarm-row .controlls-col .dashicons:last-of-type:active {
+              background: #e74c3c;
+              color: #fff;
+              border-color: #e74c3c; }
+  .page-template-clock .new-alarm-container .new-alarm-builder,
+  .page-template-clock .alarms-list-container .new-alarm-builder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: calc(100% - 100px - 0.5em);
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
+    .page-template-clock .new-alarm-container .new-alarm-builder .flex-row,
+    .page-template-clock .alarms-list-container .new-alarm-builder .flex-row {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: space-between; }
+      .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col,
+      .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col {
+        display: inline-block;
+        width: 49%; }
+        .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col .alarm-controller,
+        .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col .alarm-controller {
+          display: block;
+          width: 100%;
+          font-size: 1.5rem;
+          font-weight: normal;
+          color: #333;
+          padding: 0.5em;
+          line-height: 100%;
+          height: auto;
+          margin: 0.25em 0;
+          background: none;
+          border: 1px solid #ddd;
+          border-radius: 0;
+          cursor: pointer; }
+          .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col .alarm-controller:hover, .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col .alarm-controller:active,
+          .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col .alarm-controller:hover,
+          .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col .alarm-controller:active {
+            background: #3498db;
+            border-color: #3498db;
+            color: #fff; }
+        .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col .alarm-input,
+        .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col .alarm-input {
+          display: block;
+          width: 100%;
+          border: 1px solid #ddd;
+          border-radius: 0;
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: normal;
+          font-family: sans-serif;
+          text-shadow: none;
+          padding: 0.25em;
+          background: #fafafa; }
+          .page-template-clock .new-alarm-container .new-alarm-builder .flex-row .col .alarm-input:focus,
+          .page-template-clock .alarms-list-container .new-alarm-builder .flex-row .col .alarm-input:focus {
+            border-color: #3498db; }
+    .page-template-clock .new-alarm-container .new-alarm-builder #sound-url,
+    .page-template-clock .alarms-list-container .new-alarm-builder #sound-url {
+      display: block;
+      position: relative;
+      width: 100%;
+      font-family: sans-serif;
+      font-size: 1.25rem;
+      font-weight: normal;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 0;
+      padding: 0.25em 0.5em;
+      text-align: left; }
+      .page-template-clock .new-alarm-container .new-alarm-builder #sound-url:focus,
+      .page-template-clock .alarms-list-container .new-alarm-builder #sound-url:focus {
+        border-color: #3498db; }
+.page-template-clock .alarm-popup {
+  display: inline-block;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 2;
+  background: #fff;
+  border-radius: 3px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transform: translate(0, -50%) translateZ(0);
+  overflow: hidden; }
+  .page-template-clock .alarm-popup .alarm-hour {
+    display: block;
+    font-family: sans-serif;
+    font-size: 5vw;
+    font-weight: normal;
+    color: #333;
+    text-align: center;
+    margin: 0.25em 0;
+    line-height: 100%; }
+  .page-template-clock .alarm-popup .alarm-video {
+    display: block;
+    margin: 0 auto;
+    width: 100%; }
 .page-template-clock .hidden {
   display: none !important; }
 @keyframes zoominout {

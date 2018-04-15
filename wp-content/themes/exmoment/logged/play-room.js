@@ -48,6 +48,12 @@ function initServer() {
 			window.location = siteurl +"/"+ application_name +"-app?device=server";
 		} );
 	} );
+
+	// Check for go to command
+	if ( window.location.href.indexOf( "goto" ) > -1 ) {
+		application = window.location.href.split( "goto=" )[ 1 ];		
+		jQuery( "#app-"+ application ).trigger( "click" );
+	}
 }
 
 function initRemote() {

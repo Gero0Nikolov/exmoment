@@ -120,6 +120,15 @@
 		padding: 2.5em 0;
 		-webkit-overflow-scrolling: touch;
 
+		&.minimized {
+			height: 10%;
+			bottom: 0;
+			top: initial;
+			padding: 0;
+			cursor: pointer;
+			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+		}
+
 		.video-thumbnail {
 			display: block;
 			position: relative;

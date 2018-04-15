@@ -12,8 +12,14 @@
 ?>
 
 	</div><!-- #content -->
-		
+
 </div><!-- #page -->
+
+<footer>
+	&copy;
+	<span class="footer-logo">E<span class="marked">x</span>Moment</span>
+	<?php echo date( "Y" ); ?>
+</footer>
 
 <?php wp_footer(); ?>
 

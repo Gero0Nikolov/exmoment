@@ -10,11 +10,12 @@
  */
 
 
- if ( !is_user_logged_in() ) {
+if ( !is_user_logged_in() ) {
  	wp_redirect( get_site_url() ."/wp-admin" );
 	exit;
 } else { wp_redirect( get_site_url() ."/dashboard" ); exit; }
 
+$device = wp_is_mobile() ? "mobile" : "desktop";
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -26,7 +27,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( $device ); ?>>
 <div id="page" class="site">
 
 	<div id="content" class="site-content">

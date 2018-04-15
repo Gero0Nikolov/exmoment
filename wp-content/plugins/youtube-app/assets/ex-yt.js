@@ -125,6 +125,12 @@ function executeYTAction( command, video_id ) {
 	if ( command == "youtube_exit" ) {
 		window.location = siteurl +"/play-room?server";
 	}
+
+	if ( command.indexOf( "open" ) > -1 ) {
+	   if ( window.location.href.indexOf( video_id ) == -1 ) {
+		   window.location = siteurl +"/play-room?server&goto="+ video_id;
+	   }
+   }
 }
 
 function convert_time(duration) {
@@ -204,6 +210,7 @@ function playVideo( video_id, replay = false ) {
 									<div class='video-thumbnail' style='"+ video_thumbnail +"'></div>\
 									<h1 class='video-title'>Now playing: "+ video_title +"</h1>\
 									<button id='replay-video' video-id='"+ last_video_id +"' class='replay-button'>Replay</button>\
+									<button id='minimize-popup' class='replay-button'>Minimize</button>\
 									<button id='stop-video' video-id='"+ last_video_id +"' class='stop-button'>Stop</button>\
 									<div id='up-next'>\
 										<h1 class='up-next-title'>Up next:</h1>\
@@ -225,7 +232,7 @@ function playVideo( video_id, replay = false ) {
 										relatedToVideoId : last_video_id,
 										type : "video"
 									},
-									success : function( response ) {										
+									success : function( response ) {
 										if ( response.items.length > 0 ) {
 											next_video = response.items[ 0 ];
 
@@ -270,8 +277,18 @@ function playVideo( video_id, replay = false ) {
 								} );
 
 								// Controls
+								jQuery( "#playing-popup-"+ last_video_id ).on( "click", function( e ){
+									if ( jQuery( this ).hasClass( "minimized" ) && e.target.id != "minimize-popup" ) {
+										jQuery( this ).removeClass( "minimized" );
+									}
+								} );
+
 								jQuery( "#playing-popup-"+ last_video_id ).find( "#replay-video" ).on( "click", function(){
 									playVideo( last_video_id, true );
+								} );
+
+								jQuery( "#playing-popup-"+ last_video_id ).find( "#minimize-popup" ).on( "click", function(){
+									jQuery( this ).parent().addClass( "minimized" );
 								} );
 
 								jQuery( "#playing-popup-"+ last_video_id ).find( "#stop-video" ).on( "click", function(){

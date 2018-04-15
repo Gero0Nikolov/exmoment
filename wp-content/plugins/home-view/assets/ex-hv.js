@@ -138,8 +138,9 @@ function checkHVCommands() {
 						command = result_[ command_key ];
 
 						command_action = command.split( " " )[ 0 ];
+						application = typeof( command.split( " " )[ 1 ] ) != "undefined" ? command.split( " " )[ 1 ] : "";
 
-						executeHVAction( command_action );
+						executeHVAction( command_action, application );
 					}
 				}
 			}
@@ -181,7 +182,7 @@ function checkRHVCommands() {
 	} );
 }
 
-function executeHVAction( command ) {
+function executeHVAction( command, application ) {
 	if ( command == "homeview_exit" ) {
 		window.location = siteurl +"/play-room?server";
 	} else if ( command.indexOf( "homeview_capture_home" ) > -1 || command == "homeview_security_capture" ) {
@@ -217,6 +218,10 @@ function executeHVAction( command ) {
 				console.log( response );
 			}
 		} );
+	} else if ( command.indexOf( "open" ) > -1 ) {
+		if ( window.location.href.indexOf( application ) == -1 ) {
+			window.location = siteurl +"/play-room?server&goto="+ application;
+		}
 	}
 }
 

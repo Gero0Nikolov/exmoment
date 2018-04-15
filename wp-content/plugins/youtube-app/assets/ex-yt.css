@@ -95,6 +95,13 @@
   overflow-x: hidden;
   padding: 2.5em 0;
   -webkit-overflow-scrolling: touch; }
+  .page-template-youtube .playing-popup.minimized {
+    height: 10%;
+    bottom: 0;
+    top: initial;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); }
   .page-template-youtube .playing-popup .video-thumbnail {
     display: block;
     position: relative;

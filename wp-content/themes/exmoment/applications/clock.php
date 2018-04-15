@@ -26,6 +26,9 @@ if ( $device != "" ) {
 	</div>
 	<div id="app-view" class="<?php echo $device == "server" ? "hidden" : ""; ?>">
 		<?php if ( $device == "remote" ) { ?>
+			<button id="create-alarm" class="add-button">New Alarm</button>
+			<button id="open-library">All Alarms</button>
+			<button id="dismiss-alarm">Dismiss Alarm</button>
 			<button id="back-app-button" class="back-button">Back</button>
 		<?php } ?>
 	</div>
