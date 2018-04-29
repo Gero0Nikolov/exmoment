@@ -19,10 +19,10 @@ jQuery( document ).ready( function(){
 
 		if ( typeof( users_server[ user_id ] ) != "undefined" && users_server[ user_id ] != -1 ) {
 			play_button = "<button id='play-button-server' class='play-button'>Play</button>";
-			jQuery( "#dashboard-container" ).prepend( play_button );
+			jQuery( "#separete-row" ).prepend( play_button );
 		} else if ( typeof( users_remote[ user_id ] ) != "undefined" && users_remote[ user_id ] != -1 ) {
 			play_button = "<button id='play-button-remote' class='play-button'>Play</button>";
-			jQuery( "#dashboard-container" ).prepend( play_button );
+			jQuery( "#separete-row" ).prepend( play_button );
 		}
 
 		// Initialize controls

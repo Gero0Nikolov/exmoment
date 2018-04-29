@@ -5,7 +5,7 @@ get_header();
 
 <div id="homepage-contaiener" class="homepage-container">
 	<div id="logo-container" class="logo-container">
-		<a href="<?php echo wp_login_url(); ?>" class="login-anchor dashicons dashicons-universal-access-alt"></a>
+		<a href="<?php echo wp_login_url(); ?>" class="login-anchor">Login</a>
 		<h1 class="logo">E<span class="small">x</span>Moment</h1>
 		<h2 class="sub-title">Simple home automation simpler life.</h2>
 	</div>
@@ -22,7 +22,7 @@ get_header();
 	<div id="how-it-works-section" class="section-container bright">
 		<h1 class="section-title">How it works?</h1>
 		<div class="section-content"><strong>Start your laptop, grab your phone, enjoy the fun!</strong></div>
-		<a href="#!" target="_blank" class="section-button">Watch it!</a>
+		<a href="https://www.youtube.com/watch?v=kEwi-LEnswk&t=16s" target="_blank" class="section-button">Watch it!</a>
 	</div>
 	<div id="set-it-section" class="section-container simple">
 		<h1 class="section-title">Set it up!</h1>

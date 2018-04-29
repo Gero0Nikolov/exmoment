@@ -147,7 +147,7 @@ jQuery( document ).ready( function(){
 					minutes = jQuery( "#minutes" ).val();
 					sound_url = jQuery( "#sound-url" ).val();
 
-					if ( sound_url.indexOf( "youtube.com" ) > -1 || sound_url == "" ) {
+					if ( sound_url.indexOf( "youtube.com" ) > -1 || sound_url == "" || sound_url.indexOf( "youtu.be" ) > -1 ) {
 						jQuery.ajax( {
 							url : ajax_url,
 							type : "POST",

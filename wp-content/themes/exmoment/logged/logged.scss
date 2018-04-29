@@ -155,7 +155,8 @@ button {
 	}
 }
 
-.play-button {
+.play-button,
+.logout-button {
 	border: none;
 	background: none;
 	border-radius: 0;
@@ -166,11 +167,22 @@ button {
 	color: #333;
 	padding: 0.5em 1em;
 	min-width: 92px;
+	text-decoration: none;
+    line-height: 100%;
+	text-align: center;
 
 	&:hover {
 		background: rgba(255, 255, 255, 0.75);
 		box-shadow: 0 0 0 5px #aaa;
 	}
+}
+
+#separete-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .remove-button {
@@ -265,7 +277,12 @@ button {
 		}
 	}
 
-	.play-button {
+	#separete-row {
+		flex-direction: column;
+	}
+
+	.play-button,
+	.logout-button {
 		width: 100%;
 		margin-top: 1vh;
 		margin-bottom: 1vh;

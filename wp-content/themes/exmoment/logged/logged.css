@@ -121,7 +121,8 @@ button {
   .back-button:hover, .back-button:active {
     background: #bdc3c7; }
 
-.play-button {
+.play-button,
+.logout-button {
   border: none;
   background: none;
   border-radius: 0;
@@ -131,10 +132,21 @@ button {
   font-weight: normal;
   color: #333;
   padding: 0.5em 1em;
-  min-width: 92px; }
-  .play-button:hover {
+  min-width: 92px;
+  text-decoration: none;
+  line-height: 100%;
+  text-align: center; }
+  .play-button:hover,
+  .logout-button:hover {
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 0 0 5px #aaa; }
+
+#separete-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; }
 
 .remove-button {
   display: inline-block;
@@ -210,7 +222,10 @@ button {
       width: 100% !important;
       padding: 2.5vh !important;
       margin: 1vh auto; }
-.mobile .play-button {
+.mobile #separete-row {
+  flex-direction: column; }
+.mobile .play-button,
+.mobile .logout-button {
   width: 100%;
   margin-top: 1vh;
   margin-bottom: 1vh;

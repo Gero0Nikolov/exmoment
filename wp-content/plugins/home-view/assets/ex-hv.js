@@ -3,9 +3,6 @@ jQuery( document ).ready( function(){
 		if ( window.location.href.indexOf( "device=server" ) > -1 ) {
 			setInterval( function(){ checkHVCommands(); }, 2500 );
 
-			// Set Security interval
-			setInterval( function(){ executeHVAction( "homeview_security_capture" ); }, 10000 );
-
 			const constraints = {
 		  		video: true
 			};

@@ -124,6 +124,8 @@ function exmoment_scripts() {
 
 	wp_enqueue_script( 'exmoment-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
+	wp_enqueue_script( 'exmoment-visitor-js', get_template_directory_uri() . '/js/initial.js', array( "jquery" ), '', true );
+
 	if ( is_user_logged_in() ) {
 		wp_enqueue_style( 'exmoment-logged-css', get_template_directory_uri() . '/logged/logged.css' );
 		wp_enqueue_script( 'exmoment-logged-js', get_template_directory_uri() . '/logged/logged.js', array( "jquery" ), '', true );
@@ -432,4 +434,38 @@ function send_remote_command( $command, $remote_id, $server_id ) {
 			)
 		);
 	}
+}
+
+add_action( "admin_init", "redirect_user" );
+function redirect_user() {
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+		$user_ = wp_get_current_user( $user_id );
+
+		if ( is_admin() && !in_array( "administrator", $user_->roles ) ) {
+			wp_redirect( get_site_url() );
+			exit;
+		}
+	}
+}
+
+add_action( 'wp_ajax_email_request', 'email_request' );
+add_action( 'wp_ajax_nopriv_email_request', 'email_request' );
+function email_request() {
+	$email = isset( $_POST[ "email" ] ) && !empty( $_POST[ "email" ] ) ? sanitize_text_field( $_POST[ "email" ] ) : "";
+
+	$response = false;
+
+	if ( is_email( $email ) ) {
+		wp_mail(
+			"vtm.sunrise@gmail.com",
+			"ExMoment new user request",
+			"Open profile for: ". $email
+		);
+
+		$response = true;
+	}
+
+	echo json_encode( $response );
+	die( "" );
 }

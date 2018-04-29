@@ -895,19 +895,24 @@ object {
 
 	.login-anchor {
 		display: inline-block;
-	    font-size: 5vw;
-	    outline: 0;
-	    position: absolute;
-	    top: 0;
-	    right: 0;
-	    width: auto;
-	    height: auto;
-	    padding: 0.25em;
-	    color: #2ecc71;
-	    text-decoration: none;
+		outline: 0;
+		position: absolute;
+		top: 0.5em;
+		right: 0.5em;
+		width: auto;
+		height: auto;
+		color: #fff;
+		text-transform: lowercase;
+		text-decoration: none;
+		font-family: sans-serif;
+		font-weight: lighter;
+		font-size: 2vw;
+		background: #2ecc71;
+		padding: 0.15em 1em;
+		border-radius: 5px;
 
 		&:hover {
-			color: #27ae60;
+			background: #27ae60;
 		}
 	}
 
@@ -1132,4 +1137,20 @@ footer {
 	background: #fff;
 
 	.marked { color: #3498db; }
+}
+
+.mobile {
+	.logo-container {
+	    padding: 0 5vw;
+
+		.logo { font-size: 15.25vw; }
+		.sub-title { font-size: 5vw; }
+		.login-anchor { font-size: 5vw; }
+	}
+
+	.homepage-container .section-container .section-title { font-size: 2.25rem; }
+
+	.homepage-container .section-container { padding: 5vw; }
+
+	.homepage-container .section-container#subscribe-section .flex-row { width: 95%; }
 }

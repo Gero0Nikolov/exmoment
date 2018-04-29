@@ -10,7 +10,7 @@
  */
 
 if ( !is_user_logged_in() ) {
-	wp_redirect( get_site_url() ."/wp-admin" );
+	wp_redirect( wp_login_url() );
 	exit;
 }
 

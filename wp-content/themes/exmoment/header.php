@@ -10,10 +10,7 @@
  */
 
 
-if ( !is_user_logged_in() ) {
- 	wp_redirect( get_site_url() ."/wp-admin" );
-	exit;
-} else { wp_redirect( get_site_url() ."/dashboard" ); exit; }
+if ( is_user_logged_in() ) { wp_redirect( get_site_url() ."/dashboard" ); exit; }
 
 $device = wp_is_mobile() ? "mobile" : "desktop";
 ?>
@@ -25,6 +22,10 @@ $device = wp_is_mobile() ? "mobile" : "desktop";
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
+
+	<script type="text/javascript">
+	var ajax_url = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
+	</script>
 </head>
 
 <body <?php body_class( $device ); ?>>

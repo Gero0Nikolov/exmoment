@@ -7,6 +7,9 @@ $background = get_the_post_thumbnail_url( $page_id, "full" );
 ?>
 
 <div id="dashboard-container" style="background-image: url('<?php echo $background; ?>');">
+	<div id="separete-row">
+		<a href="<?php echo wp_logout_url( get_site_url() ); ?>" class="logout-button">Logout</a>
+	</div>
 	<div class="row">
 		<div id="add-server" class="option">
 			<img src="<?php echo get_template_directory_uri(); ?>/assets/add.png" class="icon" />
